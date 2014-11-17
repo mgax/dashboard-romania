@@ -2,9 +2,9 @@ import csv
 from collections import defaultdict
 from pathlib import Path
 
-LAB = Path(__file__).absolute().parent
-EUROSTAT = LAB / 'eurostat'
-ROOT = LAB.parent
+DATA = Path(__file__).absolute().parent
+EUROSTAT = DATA / 'eurostat'
+ROOT = DATA.parent
 csv.register_dialect('tsv', delimiter='\t')
 
 
