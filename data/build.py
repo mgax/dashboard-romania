@@ -4,7 +4,7 @@ from pathlib import Path
 
 DATA = Path(__file__).absolute().parent
 EUROSTAT = DATA / 'eurostat'
-ROOT = DATA.parent
+BUILD = DATA / 'build'
 csv.register_dialect('tsv', delimiter='\t')
 
 
@@ -48,7 +48,7 @@ def apply(table, func):
 def main():
     countries = {
         code: label.decode('utf-8') for code, label in
-        csv.reader((ROOT / 'countries.csv').open('rb'))
+        csv.reader((DATA / 'countries.csv').open('rb'))
     }
     population_tsv = read_eurostat(EUROSTAT / 'population.tsv', 'JAN', int)
     gdp_mileur_tsv = read_eurostat(EUROSTAT / 'gdp_mileur.tsv', 'B1GM,MIO_EUR')
@@ -61,7 +61,7 @@ def main():
         'eu_min_country', 'eu_min',
         'eu_max_country', 'eu_max',
     ]
-    with (ROOT / 'gdp.csv').open('wb') as f:
+    with (BUILD / 'gdp.csv').open('wb') as f:
         gdp_brackets = csv.DictWriter(f, fields)
         gdp_brackets.writeheader()
         for year in sorted(pop_year):
