@@ -1,0 +1,8 @@
+{
+  "name": "dashboard-romania",
+  "private": true,
+  "devDependencies": {
+    "coffee-script": "~1.8.0",
+    "gulp": "~3.8.10"
+  }
+}

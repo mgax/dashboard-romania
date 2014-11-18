@@ -1,0 +1,7 @@
+exclude:
+  - requirements.txt
+  - package.json
+  - node_modules
+  - gulpfile.js
+  - gulpfile.coffee
+  - data
