@@ -26,23 +26,27 @@ parsePopulation = ->
   return rv
 
 
-readEurostatGDP = ->
-  popByRegion = parsePopulation()
-
-  gdpByYear = {}
+parseGdp = (population) ->
+  rv = {}
   for row in d3.tsv.parse(read('eurostat/gdp_mileur.tsv'))
     col0 = dicPop(row, 'indic_na,unit,geo\\time')
     if (m = col0.match('B1GM,MIO_EUR,([^,]+)$'))?
       region = m[1].toLowerCase()
       if region in ['eu28', 'ro']
         for year in d3.keys(row)
-          pop = popByRegion[region][+year]
+          pop = population[region][+year]
           if pop?
-            yearRow = gdpByYear[+year] or (gdpByYear[+year] = {year: +year})
+            yearRow = rv[+year] or (rv[+year] = {year: +year})
             yearRow[region] = +row[year] * 1e6 / pop
 
-  return sort(d3.values(gdpByYear), (d) -> +d.year)
+  return rv
 
 
 compile.run = ->
-  fs.writeFileSync(__dirname + '/../data/gdp.csv', d3.csv.format(readEurostatGDP()))
+  population = parsePopulation()
+  gdp = parseGdp(population)
+
+  fs.writeFileSync(
+    __dirname + '/../data/gdp.csv',
+    d3.csv.format(sort(d3.values(gdp), (d) -> +d.year))
+  )
