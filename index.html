@@ -45,7 +45,7 @@ d3.csv('data/gdp.csv').get (err, rows) ->
 
     y = d3.scale.linear()
       .domain([0, d3.max(rows, (r) -> d3.max([+r.eu28, +r.ro]))])
-      .range([300, 0])
+      .range([200, 0])
 
     pluck = (rows, n) ->
         rv = []
@@ -64,13 +64,13 @@ d3.csv('data/gdp.csv').get (err, rows) ->
 
     svg = d3.select('body').append('svg')
         .attr('width', 800)
-        .attr('height', 400)
+        .attr('height', 300)
       .append('g')
         .attr('transform', 'translate(75, 50)')
 
     svg.append('g')
         .attr('class', 'axis axis-x')
-        .attr('transform', 'translate(0, 300)')
+        .attr('transform', 'translate(0, 200)')
         .call(xAxis)
 
     svg.append('g')
