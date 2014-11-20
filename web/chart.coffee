@@ -4,10 +4,17 @@
 class Graph
 
   constructor: (options) ->
+    @svg = options.svg
     @width = 700
     @height = 200
     @margin = {t: 50, b: 50, l: 75, r: 25}
     @seriesNames = ['eu28', 'ro']
+
+    @space = @svg
+        .attr('width', @width + @margin.l + @margin.r)
+        .attr('height', @height + @margin.t + @margin.b)
+      .append('g')
+        .attr('transform', "translate(#{@margin.l}, #{@margin.t})")
 
     d3.csv(options.file).get (err, rows) =>
       @data(rows)
@@ -39,26 +46,23 @@ class Graph
                 rv.push([@x(r.year), @y(r[n])])
         return rv
 
-    @svg = d3.select('body').append('svg')
-        .attr('width', @width + @margin.l + @margin.r)
-        .attr('height', @height + @margin.t + @margin.b)
-      .append('g')
-        .attr('transform', "translate(#{@margin.l}, #{@margin.t})")
-
-    @svg.append('g')
+    @space.append('g')
         .attr('class', 'axis axis-x')
         .attr('transform', "translate(0, #{@height})")
         .call(@xAxis)
 
-    @svg.append('g')
+    @space.append('g')
         .attr('class', 'axis axis-y')
         .call(@yAxis)
 
-    @svg.selectAll('.series')
+    @space.selectAll('.series')
         .data(@seriesNames)
       .enter().append('path')
         .attr('class', (n) => "series series-#{n}")
         .attr('d', (n) => d3.svg.line()(pluck(@rows, n)))
 
 
-new Graph(file: 'data/gdp.csv')
+new Graph(
+    svg: d3.select('body').append('svg')
+    file: 'data/gdp.csv'
+)
