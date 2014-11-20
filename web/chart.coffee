@@ -16,9 +16,6 @@ class Graph
       .append('g')
         .attr('transform', "translate(#{@margin.l}, #{@margin.t})")
 
-    d3.csv(options.file).get (err, rows) =>
-      @data(rows)
-
   data: (@rows) ->
     @x = d3.scale.linear()
       .domain(d3.extent(@rows, (r) => +r.year))
@@ -62,7 +59,5 @@ class Graph
         .attr('d', (n) => d3.svg.line()(pluck(@rows, n)))
 
 
-new Graph(
-    svg: d3.select('body').append('svg')
-    file: 'data/gdp.csv'
-)
+d3.csv('data/gdp.csv').get (err, rows) ->
+    new Graph(svg: d3.select('body').append('svg')).data(rows)
