@@ -9,7 +9,7 @@ gulp.task 'jekyll', ->
 
 gulp.task 'serve', ->
   server = express()
-  server.use(express.static('_site'))
+  server.use(express.static('target'))
   server.listen(5000)
   return require('q').defer().promise
 
@@ -25,8 +25,7 @@ gulp.task 'data_subprocess', ->
 gulp.task 'devel', ->
   gulp.watch([
       '_config.yml'
-      'data/**/*'
-      '*'
+      'site/**/*'
     ], ['jekyll'])
 
   gulp.watch([
