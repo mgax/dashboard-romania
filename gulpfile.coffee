@@ -9,7 +9,7 @@ gulp.task 'jekyll', ->
 
 gulp.task 'serve', ->
   server = express()
-  server.use(express.static('target'))
+  server.use(express.static('_site'))
   server.listen(5000)
   return require('q').defer().promise
 
