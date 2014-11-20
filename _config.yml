@@ -1,1 +1,7 @@
-source: site
+exclude:
+  - CNAME
+  - package.json
+  - node_modules
+  - gulpfile.js
+  - gulpfile.coffee
+  - src

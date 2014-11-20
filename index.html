@@ -34,11 +34,11 @@
 <body>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>
-<script src="coffee-script.js"></script>
+<script src="web/coffee-script.js"></script>
 <script type="text/coffeescript">
 'use strict'
 
-d3.csv('gdp.csv').get (err, rows) ->
+d3.csv('data/gdp.csv').get (err, rows) ->
     x = d3.scale.linear()
       .domain(d3.extent(rows, (r) -> +r.year))
       .range([0, 700])

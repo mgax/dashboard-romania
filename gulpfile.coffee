@@ -25,7 +25,9 @@ gulp.task 'data_subprocess', ->
 gulp.task 'devel', ->
   gulp.watch([
       '_config.yml'
-      'site/**/*'
+      'index.html'
+      'data/**/*'
+      'web/**/*'
     ], ['jekyll'])
 
   gulp.watch([

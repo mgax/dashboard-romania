@@ -44,4 +44,4 @@ readEurostatGDP = ->
 
 
 compile.run = ->
-  fs.writeFileSync(__dirname + '/../site/gdp.csv', d3.csv.format(readEurostatGDP()))
+  fs.writeFileSync(__dirname + '/../data/gdp.csv', d3.csv.format(readEurostatGDP()))
