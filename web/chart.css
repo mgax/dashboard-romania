@@ -1,0 +1,28 @@
+.axis path {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-size: 12px;
+}
+
+.series {
+    fill: none;
+    stroke-width: 2px;
+    stroke: #aaa;
+}
+
+.series-eu_avg {
+    stroke-width: 1px;
+}
+
+.series-ro {
+    stroke: steelblue;
+}
+
+.envelope {
+    fill: #aaa;
+    opacity: .2;
+}
