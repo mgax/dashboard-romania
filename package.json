@@ -3,6 +3,7 @@
   "private": true,
   "devDependencies": {
     "coffee-script": "~1.8.0",
+    "d3": "~3.4.13",
     "express": "~4.10.2",
     "gulp": "~3.8.10",
     "q": "~1.1.1"

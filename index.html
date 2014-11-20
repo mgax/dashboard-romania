@@ -44,7 +44,7 @@ d3.csv('gdp.csv').get (err, rows) ->
       .range([0, 700])
 
     y = d3.scale.linear()
-      .domain([0, d3.max(rows, (r) -> +r.eu_max)])
+      .domain([0, d3.max(rows, (r) -> d3.max([+r.eu28, +r.ro]))])
       .range([300, 0])
 
     pluck = (rows, n) ->
@@ -78,18 +78,10 @@ d3.csv('gdp.csv').get (err, rows) ->
         .call(yAxis)
 
     svg.selectAll('.series')
-        .data(['eu_min', 'eu_max', 'eu_avg', 'ro'])
+        .data(['eu28', 'ro'])
       .enter().append('path')
         .attr('class', (n) -> "series series-#{n}")
         .attr('d', (n) -> d3.svg.line()(pluck(rows, n)))
-
-    svg.append('path')
-        .attr('class', 'envelope')
-        .datum([].concat(
-            pluck(rows, 'eu_min')
-            pluck(rows, 'eu_max').reverse()
-        ))
-        .attr('d', (d) -> d3.svg.line()(d))
 
 
 </script>
