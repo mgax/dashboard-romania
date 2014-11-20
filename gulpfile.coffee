@@ -18,7 +18,7 @@ gulp.task 'devel', ->
   sourceFiles = [
     '_config.yml'
     'data/**/*'
-    'gallery/**/*'
+    'index.html'
   ]
   gulp.watch(sourceFiles, ['jekyll'])
   gulp.start('jekyll')
