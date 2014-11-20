@@ -59,5 +59,12 @@ class Graph
             .attr('d', (n) => d3.svg.line()(pluck(@rows, n)))
 
 
+populationGraph = new Graph(svg: d3.select('body').append('svg'))
+gdpGraph = new Graph(svg: d3.select('body').append('svg'))
+
+d3.csv('data/population.csv').get (err, rows) ->
+    populationGraph.seriesNames = ['ro']
+    populationGraph.data(rows)
+
 d3.csv('data/gdp.csv').get (err, rows) ->
-    new Graph(svg: d3.select('body').append('svg')).data(rows)
+    gdpGraph.data(rows)
