@@ -58,4 +58,5 @@ compile.run = ->
   population = parsePopulation()
   gdp = parseGdp(population)
 
+  writeCsv(table(population), 'population.csv')
   writeCsv(table(gdp), 'gdp.csv')
