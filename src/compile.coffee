@@ -12,6 +12,18 @@ read = (fileName) -> fs.readFileSync(__dirname + '/' + fileName, 'utf8')
 
 sort = (array, key) -> array.sort((a, b) -> d3.ascending(key(a), key(b)))
 
+table = (series) ->
+  out = {}
+  for name in d3.keys(series)
+    data = series[name]
+    for year in d3.keys(data)
+      row = out[year] or (out[year] = {year: year})
+      row[name] = data[year]
+  return sort(d3.values(out), (d) -> +d.year)
+
+writeCsv = (table, name) ->
+  fs.writeFileSync(__dirname + '/../data/' + name, d3.csv.format(table))
+
 
 parsePopulation = ->
   rv = {}
@@ -19,9 +31,9 @@ parsePopulation = ->
     col0 = dicPop(row, 'indic_de,geo\\time')
     region = col0.match('JAN,([^,]+)$')[1].toLowerCase()
     if region in ['eu28', 'ro']
-      popRow = rv[region] = {}
+      rvRow = rv[region] = {}
       for year in d3.keys(row)
-        popRow[+year] = +(row[year].match('^[^ ]*')[0])
+        rvRow[+year] = +(row[year].match('^[^ ]*')[0])
 
   return rv
 
@@ -33,11 +45,11 @@ parseGdp = (population) ->
     if (m = col0.match('B1GM,MIO_EUR,([^,]+)$'))?
       region = m[1].toLowerCase()
       if region in ['eu28', 'ro']
+        rvRow = rv[region] = {}
         for year in d3.keys(row)
           pop = population[region][+year]
           if pop?
-            yearRow = rv[+year] or (rv[+year] = {year: +year})
-            yearRow[region] = +row[year] * 1e6 / pop
+            rvRow[+year] = +row[year] * 1e6 / pop
 
   return rv
 
@@ -46,7 +58,4 @@ compile.run = ->
   population = parsePopulation()
   gdp = parseGdp(population)
 
-  fs.writeFileSync(
-    __dirname + '/../data/gdp.csv',
-    d3.csv.format(sort(d3.values(gdp), (d) -> +d.year))
-  )
+  writeCsv(table(gdp), 'gdp.csv')
