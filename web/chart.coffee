@@ -62,7 +62,7 @@ class Graph
         @space.selectAll('.series')
             .data(@seriesNames)
           .enter().append('path')
-            .attr('stroke', (d) => console.log(@color(d)); @color(d))
+            .attr('stroke', (d) =>  @color(d))
             .attr('class', (n) -> "series")
             .attr('d', (n) => d3.svg.line()(pluck(@rows, n)))
 
@@ -72,7 +72,7 @@ class Graph
             .enter()
             .append('g')
             .attr('class', 'legend')
-            .attr('transform', (d, i) => return 'translate(' + 15 + ', ' + 15 * i + ')')
+            .attr('transform', (d, i) -> return 'translate(0' + ', ' + 15 * i + ')')
 
         @legendItems.append('rect')
             .attr('width',  12)
@@ -82,14 +82,18 @@ class Graph
         @legendItems.append('text')
             .attr('x', 17)
             .attr('y', 10)
-            .text((d) => console.log(d); d)
+            .text((d) => d)
 
-populationGraph = new Graph(svg: d3.select('body').append('svg'),
-                            names: ['ro'],
-                            colors: ['steelblue'])
-gdpGraph = new Graph(svg: d3.select('body').append('svg'),
-                     names: ['ro', 'eu28'],
-                     colors: ['steelblue', '#aaa'])
+populationGraph = new Graph(
+  svg: d3.select('body').append('svg')
+  names: ['ro']
+  colors: ['steelblue']
+)
+gdpGraph = new Graph(
+  svg: d3.select('body').append('svg')
+  names: ['ro', 'eu28']
+  colors: ['steelblue', '#aaa']
+)
 
 d3.csv('data/population.csv').get (err, rows) ->
     populationGraph.seriesNames = ['ro']
