@@ -53,10 +53,33 @@ parseGdp = (population) ->
 
   return rv
 
+parseStudents = ->
+  rv = {}
+  for row in d3.tsv.parse(read('eurostat/students.tsv'))
+    col0 = dicPop(row, 'GEO,INDIC_ED,SEX\\TIME')
+    if (m = col0.match('^([^,]+),'))?
+      region = m[1].toLowerCase()
+      if region in ['european union (28 countries)', 'romania']
+        region = if (region == 'romania') then 'ro' else 'eu28'
+        rvRow = rv[region] = {}
+        for year in d3.keys(row)
+          data = row[year].match('^[^ ]*')[0]
+          rvRow[+year] = +data
+  rvEU = rv['eu28']
+  rvRO = rv['ro']
+  for name in d3.keys(rvEU)
+    if isNaN(rvEU[name]) or isNaN(rvRO[name])
+      delete rvEU[name]
+      delete rvRO[name]
+
+  return rv
+
 
 compile.run = ->
+  students = parseStudents()
   population = parsePopulation()
   gdp = parseGdp(population)
 
+  writeCsv(table(students), 'students.csv')
   writeCsv(table(population), 'population.csv')
   writeCsv(table(gdp), 'gdp.csv')
