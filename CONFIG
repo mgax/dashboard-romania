@@ -1,9 +1,0 @@
-apt-get install coffeescript
-apt-get install nodejs
-apt-get install libyajl-dev
-apt-get install ruby-dev
-ln -s /usr/bin/nodejs /usr/local/bin/node
-gem install jekyll
-npm install -g less
-npm install -g gulp
-gulp devel
