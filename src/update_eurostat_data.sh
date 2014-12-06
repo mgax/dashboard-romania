@@ -27,7 +27,7 @@ for file in ${!DATA_FILES[@]}; do
 	[ -e "$data" ] || continue
 	gunzip "$data"
 	raw_data="${data%.*}"
-	mv "$raw_data" "$ROOT_DIR/$DST_DIR/${file}_data.tsv"
+	mv "$raw_data" "$ROOT_DIR/$DST_DIR/${file}.tsv"
 done
 
 

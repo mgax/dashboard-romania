@@ -23,7 +23,7 @@ gulp.task 'data_subprocess', ->
 
 
 gulp.task 'update', ->
-  return child_process.spawn('scripts/update_eurostat_data.sh',
+  return child_process.spawn('src/update_eurostat_data.sh',
       ['data'],  stdio: [0, 1, 'pipe']).stderr
 
 gulp.task 'devel', ->
