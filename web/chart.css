@@ -23,15 +23,10 @@ h1 em {
 .series {
     fill: none;
     stroke-width: 2px;
-    stroke: #aaa;
 }
 
 .series-eu_avg {
     stroke-width: 1px;
-}
-
-.series-ro {
-    stroke: steelblue;
 }
 
 .envelope {
