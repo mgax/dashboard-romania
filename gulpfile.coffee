@@ -22,6 +22,10 @@ gulp.task 'data_subprocess', ->
   return child_process.spawn('gulp', ['data'], stdio: [0, 1, 'pipe']).stderr
 
 
+gulp.task 'update', ->
+  return child_process.spawn('scripts/update_eurostat_data.sh',
+      ['data'],  stdio: [0, 1, 'pipe']).stderr
+
 gulp.task 'devel', ->
   gulp.watch([
       '_config.yml'

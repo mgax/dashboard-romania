@@ -5,3 +5,4 @@ exclude:
   - gulpfile.js
   - gulpfile.coffee
   - src
+  - scripts
