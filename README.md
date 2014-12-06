@@ -11,7 +11,7 @@ Create a symbolic link for nodejs:
 	ln -s /usr/bin/nodejs /usr/local/bin/node
 
 Also install other packages, by running the following commands:
- * gem install jekyll
+ * bundle install
  * npm install -g less
  * npm install -g gulp
 
