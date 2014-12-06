@@ -61,6 +61,7 @@ class Graph
 
 populationGraph = new Graph(svg: d3.select('body').append('svg'))
 gdpGraph = new Graph(svg: d3.select('body').append('svg'))
+studentsGraph = new Graph(svg: d3.select('body').append('svg'))
 
 d3.csv('data/population.csv').get (err, rows) ->
     populationGraph.seriesNames = ['ro']
@@ -68,3 +69,6 @@ d3.csv('data/population.csv').get (err, rows) ->
 
 d3.csv('data/gdp.csv').get (err, rows) ->
     gdpGraph.data(rows)
+
+d3.csv('data/students.csv').get (err, rows) ->
+    studentsGraph.data(rows)
