@@ -5,3 +5,5 @@ exclude:
   - gulpfile.js
   - gulpfile.coffee
   - src
+  - Gemfile
+  - Gemfile.lock
