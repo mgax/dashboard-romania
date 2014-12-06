@@ -27,7 +27,7 @@ writeCsv = (table, name) ->
 
 parsePopulation = ->
   rv = {}
-  for row in d3.tsv.parse(read('eurostat/population_data.tsv'))
+  for row in d3.tsv.parse(read('eurostat/population.tsv'))
     col0 = dicPop(row, 'indic_de,geo\\time')
     region = col0.match('JAN,([^,]+)$')[1].toLowerCase()
     if region in ['eu28', 'ro']
@@ -40,7 +40,7 @@ parsePopulation = ->
 
 parseGdp = (population) ->
   rv = {}
-  for row in d3.tsv.parse(read('eurostat/gdp_data.tsv'))
+  for row in d3.tsv.parse(read('eurostat/gdp.tsv'))
     col0 = dicPop(row, 'indic_na,unit,geo\\time')
     if (m = col0.match('B1GM,MIO_EUR,([^,]+)$'))?
       region = m[1].toLowerCase()
