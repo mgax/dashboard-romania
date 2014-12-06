@@ -94,6 +94,11 @@ gdpGraph = new Graph(
   names: ['ro', 'eu28']
   colors: ['steelblue', '#aaa']
 )
+studentsGraph = new Graph(
+  svg: d3.select('body').append('svg')
+  names: ['ro', 'eu28']
+  colors: ['steelblue', '#aaa']
+)
 
 d3.csv('data/population.csv').get (err, rows) ->
     populationGraph.seriesNames = ['ro']
@@ -101,3 +106,6 @@ d3.csv('data/population.csv').get (err, rows) ->
 
 d3.csv('data/gdp.csv').get (err, rows) ->
     gdpGraph.data(rows)
+
+d3.csv('data/students.csv').get (err, rows) ->
+    studentsGraph.data(rows)
